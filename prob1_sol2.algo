@@ -1,0 +1,40 @@
+ALGORITHM SUM_Distinct
+VAR
+   tab1 : STACK; 
+   tab2 : QUEUE;
+   i,s,count : INTEGER; 
+   htab:HASH_TABLE<integer,integer>;
+BEGIN
+  // inserting the elements  in the array.
+  Write('donner les elements de tab1 :')
+ READ(tab1.push());
+ Write('donner les elements de tab2 :')
+  READ(tab2.push());
+//serching elements thaat does not repeat 
+ s:=0;
+  WHILE (NOT tab1.isEmpty()) DO
+       tab2.enqueue(tab1.pop());
+   END_WHILE
+   //htab recoit (tab2[i],nb-occurence de chaque elemnet)
+   //occ est initialisée a 0
+   FOR i FROM 0 TO tab2.length-1 
+       htab.insert(tab2[i],0)
+   END_FOR
+   
+   FOR i FROM 0 TO tab2.length-1 STEP 1  DO
+
+       IF (htab.lookup(tab2[i]) = TRUE) THEN
+           count := htab.get(tab2[i]);
+           htab.insert(tab2[i],count+1);
+       ELSE
+           htab.insert(tab2[i],1);
+       END_IF
+   END_FOR 
+ 
+   FOR i FROM 0 TO htab.length-1
+       if (htab.get(htab[i])=1) THEN s:=s+htab[i];
+   END_FOR
+END_IF
+ Write("la somme des elemnts distincts:")  
+  Write(s);
+  END
